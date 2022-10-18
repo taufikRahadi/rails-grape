@@ -118,6 +118,9 @@ GEM
     grape-entity (0.10.1)
       activesupport (>= 3.0.0)
       multi_json (>= 1.3.2)
+    grape-middleware-logger (1.12.0)
+      grape (>= 0.17)
+    hashie (5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -129,6 +132,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jwt (2.5.0)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -250,8 +254,11 @@ DEPENDENCIES
   debug
   grape (~> 1.6)
   grape-entity
+  grape-middleware-logger
+  hashie (~> 5.0)
   importmap-rails
   jbuilder
+  jwt (~> 2.5)
   pg (~> 1.4)
   puma (~> 5.0)
   rails (~> 7.0.4)
