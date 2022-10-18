@@ -1,0 +1,5 @@
+class AddUserRoleColumn < ActiveRecord::Migration[7.0]
+  def change
+    add_reference :users, :roles, foreign_key: true 
+  end
+end
