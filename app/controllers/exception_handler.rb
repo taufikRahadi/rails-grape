@@ -7,7 +7,7 @@ module ExceptionHandler
           message = "Unauthorize"
         else
           code = 500
-          message = "Unauthorize"
+          message = "Internal server error"
         end
         results = {
           code: code,
