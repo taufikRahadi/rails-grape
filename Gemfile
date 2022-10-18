@@ -77,4 +77,10 @@ gem "grape-entity"
 
 gem "pg", "~> 1.4"
 
+gem "grape-middleware-logger"
+
 gem "bcrypt", "~> 3.1"
+
+gem "hashie", "~> 5.0"
+
+gem "jwt", "~> 2.5"
