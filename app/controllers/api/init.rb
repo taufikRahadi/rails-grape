@@ -10,7 +10,6 @@ class Api::Init < Grape::API
       header = request.headers['Authorization']
       header = header.split(' ').last if header
 
-      p header
       begin
         decoded = Jsonwebtoken.decode(header)
 
