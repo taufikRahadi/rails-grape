@@ -84,3 +84,5 @@ gem "bcrypt", "~> 3.1"
 gem "hashie", "~> 5.0"
 
 gem "jwt", "~> 2.5"
+
+gem "sidekiq", "~> 6.5"
