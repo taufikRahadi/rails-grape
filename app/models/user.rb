@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :posts
-  belongs_to :role, class_name: "Role", foreign_key: "roles_id"
+  belongs_to :role, class_name: "Role", foreign_key: :roles_id
 
   # before_save :hash_password
 
