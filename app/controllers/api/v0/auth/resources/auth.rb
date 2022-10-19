@@ -1,5 +1,4 @@
 class Api::V0::Auth::Resources::Auth < Grape::API
-  require_relative '../../../../../lib/validations/length'
   resources :auth do
     
     desc "login user"
@@ -21,7 +20,7 @@ class Api::V0::Auth::Resources::Auth < Grape::API
         token = Jsonwebtoken.encode(user_id: user[:id])
 
         status 200
-        present :auth, token
+        present token: token
       rescue ActiveRecord::RecordNotFound
         error!("couldnt find user with username #{params[:username]}", 422)
       end

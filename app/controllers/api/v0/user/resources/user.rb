@@ -1,14 +1,11 @@
 class Api::V0::User::Resources::User < Grape::API
-  require_relative '../../../../../lib/validations/length'
-  require_relative '../../../../../lib/validations/is_unique'
-
   resources :user do
     desc 'fetch authenticated user profile'
     get '/profile' do
       authenticate!
       ActivityLog.write(@current_user[:id], request.ip, 'fetch profile', request.user_agent)
 
-      present :user, @current_user, with: Api::V0::User::Entities::UserEntity
+      present @current_user, with: Api::V0::User::Entities::UserEntity
     end
 
     desc 'Get list of users'
@@ -18,7 +15,7 @@ class Api::V0::User::Resources::User < Grape::API
       ActivityLog.write(@current_user[:id], request.ip, 'Get list of users', request.user_agent)
       data = User.all
 
-      present :user, data, with: Api::V0::User::Entities::UserEntity
+      present data, with: Api::V0::User::Entities::UserEntity
     end
 
     desc 'register new user and return created user'
@@ -62,14 +59,17 @@ class Api::V0::User::Resources::User < Grape::API
 
     desc 'Retrieve user by id'
     get '/:id' do
-      authenticate!
+      begin
+        authenticate!
 
-      ActivityLog.write(@current_user[:id], request.ip, 'retrieve user by id', request.user_agent)
-      data = User.joins(:role).select('*').where(id:params[:id]).first()
+        ActivityLog.write(@current_user[:id], request.ip, 'retrieve user by id', request.user_agent)
+        id = params[:id].to_i
+        data = User.find(id)
 
-      error!('User not found', env['api.response.code'] = 422) unless data.present?
-
-      present :user, data, with: Api::V0::User::Entities::UsersEntity
+        present data, with: Api::V0::User::Entities::UserEntity
+      rescue ActiveRecord::RecordNotFound
+        error!('User not found', env['api.response.code'] = 422)
+      end
     end
   end
 end
