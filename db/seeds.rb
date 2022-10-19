@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-roles = ['author', 'editor', 'owner']
+roles = ['user', 'author', 'editor', 'owner']
 roles.each do |i|
   Role.create(name: i)
 end
