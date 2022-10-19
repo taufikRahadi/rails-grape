@@ -26,9 +26,11 @@ class Api::V0::User::Resources::User < Grape::API
     end
     post '/register' do
       begin
-        ActivityLog.write(@current_user[:id], request.ip, 'Get list of users', request.user_agent)
+        ActivityLog.write(nil, request.ip, 'Registration', request.user_agent)
 
         user = User.create!(fullname: params[:fullname], username: params[:username], password: params[:password], roles_id: Role.find_by(name: 'user')[:id])
+
+        UserEmailMailer.with(user: user).welcome_email.deliver_later(wait_until: 1.minute)
         present :user, user, with: Api::V0::User::Entities::UserEntity
       rescue Exception => e
         error!(e.message, env['api.response.code'] = 500)
