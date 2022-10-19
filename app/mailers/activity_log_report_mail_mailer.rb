@@ -1,0 +1,2 @@
+class ActivityLogReportMailMailer < ApplicationMailer
+end
