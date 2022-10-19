@@ -1,4 +1,7 @@
 class Api::V0::User::Resources::User < Grape::API
+  require_relative '../../../../../lib/validations/length'
+  require_relative '../../../../../lib/validations/is_unique'
+
   resources :user do
     desc 'Get list of users'
     get '/' do
@@ -6,6 +9,19 @@ class Api::V0::User::Resources::User < Grape::API
       data = User.all
 
       present :user, data, with: Api::V0::User::Entities::UserEntity
+    end
+
+    desc 'register new user and return created user'
+    params do
+      requires :fullname, type: String, length: 3
+      requires :username, type: String, length: 3, is_unique: [User, 'username']
+      requires :password, type: String, length: 8
+    end
+    post '/register' do
+      # begin
+      #   user = User.create!()
+
+      present :user, 'anjay'
     end
 
     desc 'Create new user and return created user'
