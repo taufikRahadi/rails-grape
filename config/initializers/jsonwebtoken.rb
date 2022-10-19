@@ -1,5 +1,5 @@
 class Jsonwebtoken
-  SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
+  SECRET_KEY = "PintuKemanaSadj4"
 
   def self.encode(payload, exp = 24.hours.from_now)
     payload[:exp] = exp.to_i

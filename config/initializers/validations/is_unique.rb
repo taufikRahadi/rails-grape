@@ -9,7 +9,7 @@ class IsUnique < Grape::Validations::Validators::Base
     result = model.find_by_sql(sql)
     if result.length > 0
       raise Grape::Exceptions::Validation.new params: [@scope.full_name(attr_name)],
-                    message: "data with #{field} is already exists"
+                    message: "data with #{params[attr_name]} is already exists"
     end
   end
 end
