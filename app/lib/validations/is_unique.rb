@@ -7,7 +7,7 @@ class IsUnique < Grape::Validations::Validators::Base
     sql = "select id from #{table_name} r where r.#{field} = '#{params[attr_name]}'"
 
     result = model.find_by_sql(sql)
-    unless !result
+    if result.length > 0
       raise Grape::Exceptions::Validation.new params: [@scope.full_name(attr_name)],
                     message: "data with #{field} is already exists"
     end
