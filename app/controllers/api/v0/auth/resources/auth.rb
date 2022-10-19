@@ -13,6 +13,8 @@ class Api::V0::Auth::Resources::Auth < Grape::API
         username = params[:username]
         password = params[:password]
 
+        AddActivityLogJob.set(wait_until: 1.second).perform_later
+
         user = User.find_by!(username: username)
         validate_password = user.authenticate(password)
         error!('Wrong Password', env['api.response.code'] = 422) unless validate_password
