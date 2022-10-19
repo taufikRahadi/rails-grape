@@ -9,6 +9,8 @@ class Api::V0::Auth::Resources::Auth < Grape::API
     end
     post "/" do
       begin
+        ActivityLog.write(nil, request.ip, 'new login', request.user_agent)
+
         username = params[:username]
         password = params[:password]
 
@@ -20,7 +22,7 @@ class Api::V0::Auth::Resources::Auth < Grape::API
 
         status 200
         present :auth, token
-      rescue ActiveRecord::RecordNotFound => e
+      rescue ActiveRecord::RecordNotFound
         error!("couldnt find user with username #{params[:username]}", 422)
       end
     end

@@ -5,5 +5,25 @@ class Api::Init < Grape::API
                logger: Logger.new($stderr),
                headers: %w[version cache-control]
 
+  helpers do
+    def authenticate!
+      header = request.headers['Authorization']
+      header = header.split(' ').last if header
+
+      p header
+      begin
+        decoded = Jsonwebtoken.decode(header)
+
+        @current_user = User.find(decoded['user_id'])
+
+      rescue ActiveRecord::RecordNotFound => e
+        status 403
+        error!(['Forbidden Request', e.message], env['api.response.code'] = 403)
+      rescue JWT::DecodeError => e
+        error!('Unauthorized', env['api.response.code'] = 401)
+      end
+    end
+  end
+
   mount Api::V0::Main
 end
