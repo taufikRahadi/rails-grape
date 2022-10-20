@@ -92,3 +92,7 @@ gem "cloudinary", "~> 1.23"
 gem "carrierwave", "~> 2.2"
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "wicked_pdf", "~> 2.6"
+
+gem "wkhtmltopdf-binary", "~> 0.12.6"
