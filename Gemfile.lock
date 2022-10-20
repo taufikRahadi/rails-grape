@@ -103,6 +103,10 @@ GEM
       reline (>= 0.3.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     dry-container (0.11.0)
       concurrent-ruby (~> 1.0)
     dry-core (0.9.0)
@@ -296,6 +300,8 @@ DEPENDENCIES
   carrierwave (~> 2.2)
   cloudinary (~> 1.23)
   debug
+  dotenv (~> 2.8)
+  dotenv-rails (~> 2.8)
   grape (~> 1.6)
   grape-entity
   grape-middleware-logger

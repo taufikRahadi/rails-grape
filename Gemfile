@@ -90,3 +90,5 @@ gem "sidekiq", "~> 6.5"
 gem "cloudinary", "~> 1.23"
 
 gem "carrierwave", "~> 2.2"
+
+gem "dotenv-rails", "~> 2.8"
