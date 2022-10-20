@@ -88,3 +88,5 @@ gem "jwt", "~> 2.5"
 gem "sidekiq", "~> 6.5"
 
 gem "cloudinary", "~> 1.23"
+
+gem "carrierwave", "~> 2.2"
