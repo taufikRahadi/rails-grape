@@ -11,6 +11,7 @@ class Api::V0::User::Resources::User < Grape::API
     desc 'Get list of users'
     get '/' do
       authenticate!
+      authorize!('owner', 'editor')
 
       ActivityLog.write(@current_user[:id], request.ip, 'Get list of users', request.user_agent)
       data = User.all

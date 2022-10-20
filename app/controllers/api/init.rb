@@ -22,6 +22,13 @@ class Api::Init < Grape::API
         error!('Unauthorized', env['api.response.code'] = 401)
       end
     end
+
+    def authorize!(*roles)
+      user_role = @current_user.role.name
+
+      p user_role
+      error!('Forbidden request', env['api.response.code'] = 403) unless roles.include? user_role
+    end
   end
 
   mount Api::V0::Main
