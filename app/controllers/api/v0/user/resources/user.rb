@@ -1,4 +1,6 @@
 class Api::V0::User::Resources::User < Grape::API
+  require 'erb'
+
   resources :user do
     desc 'fetch authenticated user profile'
     get '/profile' do
@@ -58,6 +60,20 @@ class Api::V0::User::Resources::User < Grape::API
       rescue ActiveRecord::RecordInvalid => e
         error!(e.message, env['api.response.code'] = 422)
       end
+    end
+
+    desc 'Export user data to pdf'
+    get '/pdf' do
+      user = User.all
+
+      save_path = Rails.root.join('pdfs', 'filename.pdf')
+      
+      binding_copy = binding
+      template = File.open(Rails.root.join('app/views/layouts/pdf.html.erb'))
+      string = ERB.new(template).result(binding_copy)
+      pdf = WickedPdf.new.pdf_from_string(string)
+
+      pdf
     end
 
     desc 'Retrieve user by id'
