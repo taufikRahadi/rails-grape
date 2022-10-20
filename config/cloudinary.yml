@@ -1,11 +1,11 @@
 development: 
-  cloud_name: "do7apowzn"
-  api_key: "821818579412517"
-  api_secret: "5g2kUnMInlo0z6GZVahLG9uT5Aw"
+  cloud_name: <%= ENV['CLOUDINARY_CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUDINARY_API_KEY'] %>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET'] %>
   secure: true
 
 production:
-  cloud_name: "do7apowzn"
-  api_key: "821818579412517"
-  api_secret: "5g2kUnMInlo0z6GZVahLG9uT5Aw"
+  cloud_name: <%= ENV['CLOUDINARY_CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUDINARY_API_KEY'] %>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET'] %>
   secure:true
