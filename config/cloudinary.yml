@@ -1,0 +1,11 @@
+development: 
+  cloud_name: "do7apowzn"
+  api_key: "821818579412517"
+  api_secret: "5g2kUnMInlo0z6GZVahLG9uT5Aw"
+  secure: true
+
+production:
+  cloud_name: "do7apowzn"
+  api_key: "821818579412517"
+  api_secret: "5g2kUnMInlo0z6GZVahLG9uT5Aw"
+  secure:true

@@ -1,0 +1,5 @@
+development:
+  :verbose: false
+  :max_retries: 1
+  :queues:
+    - default
