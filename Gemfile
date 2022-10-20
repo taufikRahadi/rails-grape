@@ -86,3 +86,5 @@ gem "hashie", "~> 5.0"
 gem "jwt", "~> 2.5"
 
 gem "sidekiq", "~> 6.5"
+
+gem "cloudinary", "~> 1.23"
