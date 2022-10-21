@@ -1,0 +1,33 @@
+<h1>PDF</h1>
+
+<p><%= user.fullname %></p>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Fullname</th>
+      <th scope="col">Username</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |u| %>
+    <tr>
+      <th scope="row">
+        <%= u.id %>
+      </th>
+      <td>
+        <%= u.fullname %>
+      </td>
+      <td>
+        <%= u.username %>
+      </td>
+      <td>
+        <%= u.role.name %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

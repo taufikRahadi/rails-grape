@@ -64,16 +64,16 @@ class Api::V0::User::Resources::User < Grape::API
 
     desc 'Export user data to pdf'
     get '/pdf' do
-      user = User.all
+      authenticate!
+      users = User.all
 
-      save_path = Rails.root.join('pdfs', 'filename.pdf')
-      
-      binding_copy = binding
-      template = File.open(Rails.root.join('app/views/layouts/pdf.html.erb'))
-      string = ERB.new(template).result(binding_copy)
-      pdf = WickedPdf.new.pdf_from_string(string)
+      ac = ActionController::Base.new.render_to_string(template: 'user/pdf', layout: 'pdf', locals: { user: @current_user, users: users  })
 
-      pdf
+      pdf = WickedPdf.new.pdf_from_string(ac)
+
+      UserReportMailer.with(pdf: pdf, user: @current_user).user_report.deliver_now
+
+      present users, with: Api::V0::User::Entities::UserEntity
     end
 
     desc 'Retrieve user by id'
