@@ -40,8 +40,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp-relay.sendinblue.com",
     :port                 => 587,
-    :user_name            => ' ',
-    :password             => '',
+    :user_name            => ENV['SMTP_USER'],
+    :password             => ENV['SMTP_PASS'],
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
