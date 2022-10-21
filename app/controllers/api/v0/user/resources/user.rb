@@ -64,16 +64,17 @@ class Api::V0::User::Resources::User < Grape::API
 
     desc 'Export user data to pdf'
     get '/pdf' do
-      authenticate!
       users = User.all
 
-      ac = ActionController::Base.new.render_to_string(template: 'user/pdf', layout: 'pdf', locals: { user: @current_user, users: users  })
+      ac = ActionController::Base.new.render_to_string(template: 'user/pdf', layout: 'pdf', locals: { users: users  })
 
       pdf = WickedPdf.new.pdf_from_string(ac)
 
-      UserReportMailer.with(pdf: pdf, user: @current_user).user_report.deliver_now
+      content_type "application/pdf"
+      header['Content-Disposition'] = "attachment; filename=user.pdf"
+      env['api.format'] = :binary
 
-      present users, with: Api::V0::User::Entities::UserEntity
+      body pdf
     end
 
     desc 'Retrieve user by id'

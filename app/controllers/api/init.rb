@@ -5,6 +5,9 @@ class Api::Init < Grape::API
                logger: Logger.new($stderr),
                headers: %w[version cache-control]
 
+  include Grape::Extensions::Hashie::Mash::ParamBuilder
+  include ExceptionHandler
+
   helpers do
     def authenticate!
       header = request.headers['Authorization']
